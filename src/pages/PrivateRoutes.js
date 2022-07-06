@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import ls from "localstorage-slim";
-const PrivateRoute = ({ children }) => {
+const PrivateRoutes = ({ children }) => {
   const location = useLocation();
   const user = ls.get("id");
 
@@ -16,4 +16,4 @@ const PrivateRoute = ({ children }) => {
 
   return [children];
 };
-export default PrivateRoute;
+export default PrivateRoutes;

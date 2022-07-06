@@ -21,7 +21,6 @@ const UserContextProvider = ({ children }) => {
     const id ={
       sessionId : ls.get('id')
     }
-    console.log(id);
     try {
       const { status } = await logout(id);
       if (status === 200) {
