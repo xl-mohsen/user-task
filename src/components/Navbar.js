@@ -2,10 +2,14 @@ import styled from "styled-components";
 import { useGlobalContext } from "../context/context";
 
 const Navbar = () => {
-  const { logoutUser } = useGlobalContext();
-
+  const { logoutUser, user } = useGlobalContext();
   return (
     <Wrapper>
+      {user && user.username && (
+        <h4>
+          Welcom , <strong>{user.username.toUpperCase()}</strong>
+        </h4>
+      )}
       <button onClick={() => logoutUser()}>Logout</button>
     </Wrapper>
   );

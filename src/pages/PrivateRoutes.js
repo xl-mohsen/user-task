@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import ls from "localstorage-slim";
 const PrivateRoutes = ({ children }) => {
   const location = useLocation();
-  const user = ls.get("id");
+  const user = ls.get("session");
 
   useEffect(() => {
     ls.flush();

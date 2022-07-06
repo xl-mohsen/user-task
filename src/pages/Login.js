@@ -2,17 +2,17 @@ import styled from "styled-components";
 import { Forms } from "../components";
 import { useGlobalContext } from "../context/context";
 import loginImg from "../images/login-img.svg";
-import { createUser, login } from "../services/APIs";
 import { v4 as uuid } from "uuid";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ls from "localstorage-slim";
 import { Navigate } from "react-router-dom";
 
+//f874be8d-d71e-4012-b11f-3f0471a1af8a
+
 const Login = () => {
-  const { activeState, setActiveState, toggleError } = useGlobalContext();
-  const user = ls.get("id");
-  const navigate = useNavigate();
+  const { activeState, setActiveState, toggleError, loginUser, signupUser } =
+    useGlobalContext();
+  const user = ls.get("session");
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -22,42 +22,28 @@ const Login = () => {
 
   //submit form
   const submitHandler = async (e) => {
+
+    //form input simple validation
     e.preventDefault();
-    if (activeState.login && !userData.email && !userData.password) {
-      return toggleError({ show: true, msg: "validation failed" });
-    } else if (
-      activeState.signup &&
-      !userData.email &&
-      !userData.password &&
-      !userData.userName
-    ) {
-      return toggleError({ show: true, msg: "validation failed" });
+    if (activeState.login && !userData.email) {
+      return toggleError("Email validation failed");
+    } else if (activeState.login && !userData.password) {
+      return toggleError("Password validation failed");
+    }
+
+    if (activeState.signup && !userData.email) {
+      return toggleError("Email validation failed");
+    } else if (activeState.signup && !userData.password) {
+      return toggleError("Password validation failed");
+    } else if (activeState.signup && !userData.username) {
+      return toggleError("username validation failed");
     }
 
     if (activeState.signup) {
-      try {
-        const { status } = await createUser(userData);
-        if (status === 200) {
-          navigate("/");
-        }
-      } catch (error) {
-        toggleError({ show: true, msg: error.response.data.detail });
-      }
+      signupUser(userData);
     } else if (activeState.login) {
       const user = { email: userData.email, password: userData.password };
-      try {
-        const {
-          status,
-          data: { session },
-        } = await login(user);
-        ls.set("id", session.id, { ttl: session.expires });
-        if (status === 200) {
-          navigate("/");
-        }
-      } catch (error) {
-        console.log(error);
-        toggleError({ show: true, msg: error.response.data.detail });
-      }
+      loginUser(user);
     }
   };
 
@@ -67,45 +53,47 @@ const Login = () => {
     setUserData({ ...userData, [name]: value });
   };
 
-  if (user) {
+  if (user && user.id) {
     return <Navigate to="/" replace />;
   }
 
   return (
-    <Wrapper>
-      <div className="container">
-        {!activeState.login && !activeState.signup && (
-          <>
-            {" "}
-            <img src={loginImg} alt="login" />
-            <h1>login / sign up</h1>
-          </>
-        )}
+    <>
+      <Wrapper>
+        <div className="container">
+          {!activeState.login && !activeState.signup && (
+            <>
+              {" "}
+              <img src={loginImg} alt="login" />
+              <h1>login / sign up</h1>
+            </>
+          )}
 
-        {activeState.login || activeState.signup ? (
-          <Forms
-            submitHandler={submitHandler}
-            onChangeHandler={onChangeHandler}
-            userData={userData}
-          />
-        ) : null}
+          {activeState.login || activeState.signup ? (
+            <Forms
+              submitHandler={submitHandler}
+              onChangeHandler={onChangeHandler}
+              userData={userData}
+            />
+          ) : null}
 
-        <div className="button-container">
-          <button
-            className="btn"
-            onClick={() => setActiveState({ login: true, signup: false })}
-          >
-            login
-          </button>
-          <button
-            className="btn"
-            onClick={() => setActiveState({ login: false, signup: true })}
-          >
-            sign up
-          </button>
+          <div className="button-container">
+            <button
+              className="btn"
+              onClick={() => setActiveState({ login: true, signup: false })}
+            >
+              login
+            </button>
+            <button
+              className="btn"
+              onClick={() => setActiveState({ login: false, signup: true })}
+            >
+              sign up
+            </button>
+          </div>
         </div>
-      </div>
-    </Wrapper>
+      </Wrapper>
+    </>
   );
 };
 const Wrapper = styled.section`

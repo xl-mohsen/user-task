@@ -33,3 +33,12 @@ export const logout = (data) => {
     data,
   });
 };
+
+export const readUserData = (data) => {
+  return axios({
+    method: "post",
+    url: `${baseURL}/Read`,
+    headers: config,
+    data,
+  });
+};
