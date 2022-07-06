@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# پیاده سازی تسک 
+### تسک شماره ۱ :‌تعریف کردن و اضافه کردن پروژه به گیت هاب ✅️
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### تسک شماره ۲ :‌ پیاده سازی سرویس login و logout که با توجه به توضیحاتی که داخل داکیومنت Users Api داده شده بود با موفقیت انجام شد ✅️
 
-## Available Scripts
+پیاده سازی این تسک به این صورت بود که دوتا func تعریف شد برای هرکدام از عملیات های login و logout و بعد توسط api ها و react router dom و اطلاعاتی که از user داخل local storage مرورگر save شده بود این عملیات انجام میشد . به این صورت که اطلاعاتی که از کاربر برای login دریافت میشد به سمت api ارسال میشه و اگر response موفقیت آمیز بود user به صفحه document انتقال داده میشه و اگر در صفحه document بنا به دلایلی خواست logout کنه اطلاعات session یوزر که داخل local storage ذخیره شده واکشی میشه و به سمت api فرستاده میشه اگر response موفقیت آمیز بود اطلاعات از local storage پاک میشوند و یوزر از صفحه document خارج میشه 
 
-In the project directory, you can run:
 
-### `npm start`
+### تسک شماره ۳ : نمایش curent time زمانی که کاربر login کرد ✅️
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+پیاده سازی این تسک به این صورت بود که وقتی کاربر login میکنه توسط react router dom کاربر رو به صفحه مورد نظر که زمان خود سیستم کاربر رو به صورت دیجیتالی نشان میده هدایت میکنیم که کاربر در این صفحه توانایی logout کردن و مشاهده username خود که موقع فرایند signup ذخیره کرده را دارد
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+### تسک شماره ۴ :‌ جلو گیری از ورود یوزر به صفحه document وقتی عملیات login انجام نشده بود ✅️
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+پیاده سازی این تسک به این صورت بود که توسط react router dom و اطلاعات session کاربر که داخل local storage ذخیره میشه استفاده میشه . 
+به این صورت که اگر session از کاربر مورد نظر داخل local storage ذخیره نشده باشه توسط private route به کاربر اجازه داده نمیشود که وارد صفحه مورد نظر بشه
+ 
++++++ یه مورد اضافی هم که اینجا انجام شده این است که اگر کاربر login کرده باشه و بخواد به صفحه login برگرده باز چک میشه و دوباره جلوش گرفته میشه از ورود به این صفحه ینی این عملیات دو طرفه چک میشه
 
-### `npm run build`
+### تسک شماره ۵ :‌ پیاده سازی unit test برای login page  🔴️
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+از آنجایی که تجربه پیاده سازی unit test ندارم نتوستم این تسک رو طوری پیاده کنم که رضایت بخش باشه برای همین داخل پروژه قرارش ندادم . هرچند خیلی تلاش کردم برای پیاده سازیش که اگر تایم بیشتری در اختیار داشتم قطعا میتونستم پیاده سازیش کنم چون چیز خاصی نداره .
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### تسک شماره ۶ :‌ ✅️
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+این تسک در واقع با code splitting حل میشه ینی ما بیایم به صورت lazy loading کامپوننت های route اصلی رو پیاده کنیم که این امر باعث میشه chunk file ما splite بشه و در هر زمانی که ما رو route مشخص بودیم component مورد نظرش استفاده شه و همزمان همه component ها داخل bundle file ما قرار نگیرند 
 
-### `npm run eject`
+ریکت با قابلیت lazy loading این ویژگی رو در اختیار ما میذاره که هروقت خواستیم route مورد نظر رو call کنیم فقط همون کامپوننت call شه و بقیه route ها به اصطلاح hide بمونن . 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### تسک های اضافه ای که انجام شده ✅️
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
++++++پیاده سازی صفحه error به طوری که هر routeای به جز route های اصلی استفاده شه صفحه ارور و لینک بازگشت به صفحه اصلی به کاربر نمایش داده بشه
 
-## Learn More
+++++++پیاده سازی فرم ثبت نام به طوری که کاربر میتونه ثبت نام کنه و بعد از ثبت نام فرایند login رو انجام بده
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
++++++گرفتن اطلاعات کاربر زمانی که کاربر login کرده و در صفحه document قرار داره . به صورتی که اطلاعات کاربر از api گرفته میشه و username او در navbar نشان داده میشه
 
-To learn React, check out the [React documentation](https://reactjs.org/).
++++++جلو گیری از ورود کاربر به صفحه login اگر همزمان اطلاعات session کاربر در مرورگر باشه . ینی کاربر هنوز login باشه از ورودش به صفحه login جلوگیری میشه
 
-### Code Splitting
+اطلاعات کاربر داخل local storage ذخیره میمونه و در expire time که داخل session قرار داده شده بود این اطلاعات از local storage پاک میشوند . ینی کاربر تا زمان expire time داخل صفحه خود login میمونه و به اصطلاح اطلاعات کاربر persist میشه و کاربر با refresh صفحه یا بستن مرورگر باز هم session پابرجا میمونه
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+++++++مدریت ارور ها چه موقع درخواست ها چه زمان پرکردن فرم ها
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
