@@ -7,8 +7,6 @@ import { useState } from "react";
 import ls from "localstorage-slim";
 import { Navigate } from "react-router-dom";
 
-//f874be8d-d71e-4012-b11f-3f0471a1af8a
-
 const Login = () => {
   const { activeState, setActiveState, toggleError, loginUser, signupUser } =
     useGlobalContext();
